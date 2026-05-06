@@ -1,15 +1,28 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "./components/Header";
-import Projects from "./components/Projects";
+import Hero from "./components/Hero";
+import Inventory from "./components/Inventory";
+import Quests from "./components/Quests";
+import Workbench from "./components/Workbench";
+import Footer from "./components/Footer";
 import "./App.css";
-import BackgroundCircles from "./components/BackgroundCircles";
 
 export default function App() {
   return (
     <div className="app-root">
-      <BackgroundCircles />
+      <div className="sky-overlay" />
+      
       <Header />
-      <Projects />
+      
+      <main>
+        <Hero />
+        <Inventory />
+        <Quests />
+        <Workbench />
+      </main>
+
+      <Footer />
     </div>
   );
 }
