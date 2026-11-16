@@ -1,25 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Silkscreen:wght@400;700&display=swap');
 
 :root {
-  /* Minecraft Palette - Soft Modern Tones */
-  --sky-top: #74b9ff;
-  --sky-bottom: #a29bfe;
-  --grass-primary: #2ecc71;
-  --grass-dark: #27ae60;
+  /* Soft 3-Color Hero & Global Theme Palette */
+  --hero-primary: #1e293b;
+  --hero-secondary: #cbd5e1;
+  --hero-accent: #6ee7b7;
+
+  /* Harmonized Soft Sky & Surface Tones */
+  --sky-top: #1e293b;
+  --sky-bottom: #334155;
+  --grass-primary: #6ee7b7;
+  --grass-dark: #34d399;
   --earth-primary: #e67e22;
-  --stone-primary: #95a5a6;
-  --stone-dark: #7f8c8d;
+  --stone-primary: #475569;
+  --stone-dark: #334155;
   
   /* UI Colors */
-  --glass-bg: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --text-main: #ffffff;
-  --text-dark: #2d3436;
-  --accent: #fdcb6e;
+  --glass-bg: rgba(203, 213, 225, 0.08);
+  --glass-border: rgba(203, 213, 225, 0.22);
+  --text-main: #f8fafc;
+  --text-dark: #1e293b;
+  --accent: #6ee7b7;
   
   /* Block Styles */
   --block-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
-  --block-radius: 4px; /* Slight roundness for "soft" feel */
+  --block-radius: 6px; /* Slight roundness for "soft" feel */
 }
 
 * {
@@ -88,6 +93,8 @@ h1, h2, h3, .pixel-font {
 .mc-button.primary {
   background: var(--grass-primary);
   border-color: var(--grass-dark);
+  color: var(--hero-primary);
+  text-shadow: none;
 }
 
 /* Responsive Nav Toggles */

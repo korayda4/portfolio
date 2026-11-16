@@ -1,5 +1,6 @@
 import React from "react";
 import { GithubLogo, LinkedinLogo, Heart, Globe, Cpu } from "phosphor-react";
+import { CV_CONFIG } from "../data/cvConfig";
 
 export default function Footer() {
   return (
@@ -28,6 +29,7 @@ export default function Footer() {
               <a href="#inventory">Inventory</a>
               <a href="#quests">Active Quests</a>
               <a href="#workbench">The Signal</a>
+              <a href={CV_CONFIG.routePath}>CV</a>
             </div>
           </div>
 

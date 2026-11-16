@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GithubLogo, List, X, House, IdentificationBadge, Briefcase, ChatCircleText } from "phosphor-react";
+import { GithubLogo, List, X, House, IdentificationBadge, Briefcase, ChatCircleText, FilePdf } from "phosphor-react";
+import { CV_CONFIG } from "../data/cvConfig";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,8 @@ export default function Header() {
     { name: "Home", href: "#", icon: <House size={20} /> },
     { name: "Inventory", href: "#inventory", icon: <IdentificationBadge size={20} /> },
     { name: "Quests", href: "#quests", icon: <Briefcase size={20} /> },
-    { name: "Workbench", href: "#workbench", icon: <ChatCircleText size={20} /> }
+    { name: "Workbench", href: "#workbench", icon: <ChatCircleText size={20} /> },
+    { name: "CV", href: CV_CONFIG.routePath, icon: <FilePdf size={20} /> }
   ];
 
   return (
