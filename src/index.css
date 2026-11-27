@@ -1,176 +1,198 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Silkscreen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap');
 
+/*
+  Six-tone system. Every surface, line and text color in the UI is one of
+  these six, or one of them mixed toward transparent.
+*/
 :root {
-  /* Soft 3-Color Hero & Global Theme Palette */
-  --hero-primary: #1e293b;
-  --hero-secondary: #cbd5e1;
-  --hero-accent: #6ee7b7;
+  --ink: #0a0a0b;       /* canvas */
+  --carbon: #131315;    /* panels & cards */
+  --graphite: #26272b;  /* lines, hovers */
+  --ash: #8e9099;       /* secondary text */
+  --bone: #ededef;      /* primary text */
+  --signal: #5b8cff;    /* accent */
 
-  /* Harmonized Soft Sky & Surface Tones */
-  --sky-top: #1e293b;
-  --sky-bottom: #334155;
-  --grass-primary: #6ee7b7;
-  --grass-dark: #34d399;
-  --earth-primary: #e67e22;
-  --stone-primary: #475569;
-  --stone-dark: #334155;
-  
-  /* UI Colors */
-  --glass-bg: rgba(203, 213, 225, 0.08);
-  --glass-border: rgba(203, 213, 225, 0.22);
-  --text-main: #f8fafc;
-  --text-dark: #1e293b;
-  --accent: #6ee7b7;
-  
-  /* Block Styles */
-  --block-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
-  --block-radius: 6px; /* Slight roundness for "soft" feel */
+  --line: var(--graphite);
+  --line-soft: color-mix(in srgb, var(--graphite) 60%, transparent);
+  --hover: color-mix(in srgb, var(--graphite) 55%, transparent);
+  --signal-soft: color-mix(in srgb, var(--signal) 14%, transparent);
+  --bone-dim: color-mix(in srgb, var(--bone) 72%, transparent);
+
+  --r-1: 4px;
+  --r-2: 6px;
+
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --topbar-h: 56px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  color-scheme: dark;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
-  font-family: 'Outfit', sans-serif;
-  color: var(--text-main);
-  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 100%);
-  min-height: 100vh;
-  overflow-x: hidden;
-  cursor: crosshair; 
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--bone);
+  background: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, .pixel-font {
-  font-family: 'Silkscreen', cursive;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Glassmorphism Block Utility */
-.glass-block {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  border: 2px solid var(--glass-border);
-  box-shadow: var(--block-shadow);
-  border-radius: var(--block-radius);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.glass-block:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
-}
-
-/* Minecraft Button */
-.mc-button {
-  background: #bdc3c7;
-  border: 4px solid #7f8c8d;
-  border-bottom-color: #2c3e50;
-  border-right-color: #2c3e50;
-  padding: 12px 24px;
-  color: #fff;
-  font-family: 'Silkscreen', cursive;
-  cursor: pointer;
-  text-shadow: 2px 2px #2c3e50;
-  transition: all 0.1s;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+a {
+  color: inherit;
   text-decoration: none;
 }
 
-.mc-button:active {
-  transform: translate(2px, 2px);
-  box-shadow: none;
-  border-bottom-color: #7f8c8d;
-  border-right-color: #7f8c8d;
-  border-top-color: #2c3e50;
-  border-left-color: #2c3e50;
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
 }
 
-.mc-button.primary {
-  background: var(--grass-primary);
-  border-color: var(--grass-dark);
-  color: var(--hero-primary);
-  text-shadow: none;
+img {
+  display: block;
+  max-width: 100%;
 }
 
-/* Responsive Nav Toggles */
-@media (max-width: 768px) {
-  .desktop-nav {
-    display: none !important;
-  }
-  .mobile-toggle {
-    display: flex !important;
-  }
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+  border-radius: var(--r-1);
 }
 
-/* Scrollbar Minecraft Style */
+::selection {
+  background: var(--signal-soft);
+  color: var(--bone);
+}
+
+/* Thin, quiet scrollbars for the scrolling regions */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--graphite) transparent;
+}
+
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--stone-primary);
-  border-left: 2px solid var(--stone-dark);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--grass-primary);
-  border: 3px solid var(--grass-dark);
-  box-shadow: inset 2px 2px 0px rgba(255, 255, 255, 0.4);
+  background: var(--graphite);
+  border-radius: var(--r-1);
+  border: 2px solid var(--ink);
 }
 
-/* Layout Utilities */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
+/* Shared primitives */
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ash);
 }
 
-.section-padding {
-  padding: 100px 0;
+.mono {
+  font-family: var(--font-mono);
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-.float {
-  animation: float 4s ease-in-out infinite;
-}
-
-/* Inventory Grid Style */
-.inventory-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 12px;
-  padding: 16px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 4px solid #333;
-  box-shadow: inset 4px 4px 0px rgba(0, 0, 0, 0.2);
-}
-
-.inventory-slot {
-  aspect-ratio: 1;
-  background: #8b8b8b;
-  border: 2px solid #373737;
-  border-top-color: #ffffff;
-  border-left-color: #ffffff;
-  display: flex;
+.btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  transition: all 0.2s;
+  gap: 8px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--r-1);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  background: var(--carbon);
+  color: var(--bone);
+  transition: background-color 0.15s var(--ease), border-color 0.15s var(--ease), color 0.15s var(--ease);
 }
 
-.inventory-slot:hover {
-  background: #c6c6c6;
-  border-color: #fff;
-  transform: scale(1.1);
-  z-index: 10;
+.btn:hover {
+  background: var(--graphite);
+}
+
+.btn-primary {
+  background: var(--bone);
+  border-color: var(--bone);
+  color: var(--ink);
+}
+
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--bone) 86%, var(--ink));
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ash);
+}
+
+.btn-ghost:hover {
+  background: var(--hover);
+  color: var(--bone);
+}
+
+.btn-icon {
+  width: 32px;
+  padding: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--r-1);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--bone-dim);
+  white-space: nowrap;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
